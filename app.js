@@ -17,8 +17,11 @@ var  indexRoutes      = require("./routes/index"),
     
 //DB Connection
 app.locals.moment = require("moment");
-//mongoose.connect("mongodb://localhost:27017/yorkland_admin", { useNewUrlParser: true });
-mongoose.connect("mongodb://subat:subat1988@ds163226.mlab.com:63226/yokrlandadmin",{ useNewUrlParser: true });
+
+mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
+//mongoose.connect("mongodb://subat:subat1988@ds163226.mlab.com:63226/yokrlandadmin",{ useNewUrlParser: true });
+
+
 mongoose.set('useCreateIndex', true);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine","ejs");
