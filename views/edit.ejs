@@ -1,0 +1,69 @@
+<% include ./partials/header %> 
+<form action="/home/<%=student._id %>?_method=PUT" method="POST">
+   <div><h2>Edit Student Info</h2></div>
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="EnterFirstName">First Name</label>
+      <input type="text" class="form-control" id="firstName" value="<%=student.firstName%>" name="firstName" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="EnterLastName">Last name</label>
+      <input type="text" class="form-control" id="lastName" value="<%=student.lastName%>" name="lastName" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="EnterDOB">Date of Birth</label>
+      <input type="date" class="form-control" id="dob" value="<%=student.dob%>" name="dob" required>
+    </div>
+  </div>
+  <div><h2>Edit Student Fee</h2></div>
+   <div class="form-row">
+     <div class="col-md-4 mb-3">
+      <label for="EnterTuition">Tuition</label>
+      <input type="number" class="form-control" id="tuition" value="<%=student.finance.tuition%>" name="tuition">
+    </div>
+     <div class="col-md-4 mb-3">
+      <label for="EnterCredit">Number Of Credit</label>
+      <input type="number" class="form-control" step="0.01" id="credit" value="<%=student.finance.credit%>" name="credit">
+    </div>
+     <div class="col-md-4 mb-3">
+      <label for="SelectEntryTime">Student Entry Time</label>
+      <select class="form-control" id="studentEntryTime" name="studentEntryTime">
+       <option value="Winter 2017 Semester" >Winter   2017 Semester</option>
+       <option value="Summer 2017 Semester" >Summer   2017 Semester</option>
+       <option value="Fall   2017 Semester" >Fall     2017 Semester</option>
+       <option value="Winter 2018 Semester" >Winter   2018 Semester</option>
+       <option value="Summer 2018 Semester" >Summer   2018 Semester</option>
+       <option value="Fall   2018 Semester" >Fall     2018 Semester</option>
+       <option value="Winter 2019 Semester" >Winter   2019 Semester</option>
+       <option value="Summer 2019 Semester" >Summer   2019 Semester</option>
+       <option value="Fall   2019 Semester" >Fall     2019 Semester</option>
+     </select>
+    </div>
+   </div>
+   <div class="form-row">
+     <div class="col-md-4 mb-3">
+      <label for="EnterAfterSchoolProgram">After School Program</label>
+      <input type="text" class="form-control" id="program" value="<%=student.finance.afterSchoolProgram%>" name="afterSchoolProgram">
+    </div>
+     <div class="col-md-3 mb-3">
+      <label for="EnterAfterSchoolProgramFee">After School Fee</label>
+      <input type="number" class="form-control" id="afterSchoolFee" value="<%=student.finance.afterSchoolFee%>" name="afterSchoolFee">
+    </div>
+   </div>
+   <div class="form-row">
+     <div class="col-md-4 mb-3">
+      <label for="EnterInsuranceFee">Insurance Fee</label>
+      <input type="text" class="form-control" id="InsuranceFee" value="<%=student.finance.insuranceFee%>" name="insuranceFee">
+    </div>
+     <div class="col-md-3 mb-3">
+      <label for="EnterLunchFee">Lunch Fee</label>
+      <input type="number" class="form-control" id="lunchFee" value="<%=student.finance.lunchFee%>" name="lunchFee">
+    </div>
+   </div>
+   <div class="form-group">
+          <button class="btn btn-lg btn-primary btn-block">Edit Student</button>
+    </div>
+  </form>
+
+ 
+ <% include ./partials/footer %>

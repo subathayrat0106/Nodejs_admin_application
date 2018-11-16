@@ -1,0 +1,15 @@
+<% include ../partials/header %> 
+  <h2>Edit Comment</h2>
+  <form action="/home/<%=student_id %>/comments/<%=comment._id%>?_method=PUT" method="POST">
+     <div class="form-group">
+      <label for="usr">Comment Title:</label>
+      <input type="text" class="form-control" id="title" name="comment[title]" value="<%=comment.title%>">
+    </div>
+    <div class="form-group">
+      <label for="comment">Comment Content:</label>
+      <textarea class="form-control" rows="5" id="comment" name="comment[text]"><%=comment.text%></textarea>
+    </div>
+    <button type="submit" id="submitButton" class="btn btn-primary">Submit</button>
+  </form>
+ 
+ <% include ../partials/footer %>

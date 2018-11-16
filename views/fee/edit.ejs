@@ -1,0 +1,39 @@
+<% include ../partials/header %> 
+ <h3>Edit Student Balance Fee</h3>
+        <hr />
+         <form action="/home/<%=student_id%>/fee/<%=fee._id%>?_method=PUT" method="POST">
+             <dl class="row" align="left">
+                 <dt class="col-md-6">Edit Updated Tuition</dt>
+                 <dd class="col-md-6">
+                       <div class="form-group">
+                         <input class="form-control" type="number" name="update[updatedTuition]" value="<%=fee.updatedTuition%>">
+                       </div>
+                  </dd>
+                 <dt class="col-md-6">Edit Updated Number Of Credit</dt>
+                 <dd class="col-md-6">
+                       <div class="form-group">
+                         <input class="form-control" type="number" name="update[updatedCredit]" value="<%=fee.updatedCredit%>" step="0.01">
+                       </div>
+                  </dd>
+                 <dt class="col-md-6">Edit Updated After School Fee</dt>
+                 <dd class="col-md-6">
+                       <div class="form-group">
+                         <input class="form-control" type="number" name="update[updatedAfterSchoolFee]" value="<%=fee.updatedAfterSchoolFee%>">
+                       </div>
+                  </dd>
+                 <dt class="col-md-6">Edit Update Insurance Fee</dt>
+                 <dd class="col-md-6">
+                       <div class="form-group">
+                         <input class="form-control" type="number" name="update[updatedInsuranceFee]" value="<%=fee.updatedInsuranceFee%>">
+                       </div>
+                  </dd>
+                 <dt class="col-md-6">Edit Update Lunch Fee</dt>
+                 <dd class="col-md-6">
+                       <div class="form-group">
+                         <input class="form-control" type="number" name="update[updatedLunchFee]" value="<%=fee.updatedLunchFee%>">
+                       </div>
+                  </dd>
+                  <button type="submit" id="updatedButton" class="btn btn-primary">Edit</button>
+             </dl>
+        </form>
+ <% include ../partials/footer %>

@@ -1,0 +1,16 @@
+ <% include ../partials/header %> 
+  <h2>Add Comment to <%=student.firstName%> <%=student.lastName%></h2>
+  <p>please add comments to textarea:</p>
+  <form action="/home/<%=student._id %>/comments" method="POST">
+     <div class="form-group">
+      <label for="usr">Comment Title:</label>
+      <input type="text" class="form-control" id="title" name="comment[title]">
+    </div>
+    <div class="form-group">
+      <label for="comment">Comment Content:</label>
+      <textarea class="form-control" rows="5" id="comment" name="comment[text]"></textarea>
+    </div>
+    <button type="submit" id="submitButton" class="btn btn-primary">Submit</button>
+  </form>
+ 
+ <% include ../partials/footer %>

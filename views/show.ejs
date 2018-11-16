@@ -1,0 +1,260 @@
+ <% include ./partials/header %> 
+  <div class="container-fluid">
+    <div class="row extra_margin">
+      <div class="col-md-3 col-sm-12 col-xs-12">
+          <div class="text-center">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Default_profile_picture_%28male%29_on_Facebook.jpg/240px-Default_profile_picture_%28male%29_on_Facebook.jpg" class="img-rounded"/>
+              <h4><%=student.firstName%> <%=student.lastName%></h4>
+                <a class="btn btn-xs btn-warning" href="/home/<%=student._id%>/edit">Edit</a>
+                 <form class="delete-form" action="/home/<%=student._id%>?_method=DELETE" method="POST">
+                      <button class="btn btn-xs btn-danger">Delete</button>
+                 </form>
+          </div>
+      </div> 
+      <div class="col-md-9 col-sm-2 col-xs-1">
+        <h3>Student Info</h3>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="home" aria-expanded="true">Entry Fee</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-controls="profile">Balance</a>
+        </li>
+    </ul>
+         <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="1-tab">
+        
+              <div class="tab-pane-header">
+                <p class="lead">
+                  <dl class="row" align="left">
+                  <dt class="col-sm-6">Tuition</dt>
+                  <dd class="col-sm-6">$<%=student.finance.tuition %></dd>
+                  <dt class="col-sm-6">Number Of Credit</dt>
+                  <dd class="col-sm-6"><%=student.finance.credit %> <strong>Unit</strong></dd>
+                  <dt class="col-sm-6">Student Entry Time</dt>
+                  <dd class="col-sm-6"><%=student.studentEntryTime %></dd>
+                  <dt class="col-sm-6">After School Program</dt>
+                  <dd class="col-sm-6"><%=student.finance.afterSchoolProgram %></dd>
+                  <dt class="col-sm-6">After School Program Fee</dt>
+                  <dd class="col-sm-6">$<%=student.finance.afterSchoolFee%></dd>
+                  <dt class="col-sm-6">Insurance Fee</dt>
+                  <dd class="col-sm-6">$<%=student.finance.insuranceFee%></dd>
+                  <dt class="col-sm-6">Lunch Fee</dt>
+                  <dd class="col-sm-6">$<%=student.finance.lunchFee%></dd>
+                </dl>
+                </p>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="2-tab">
+        
+              <div class="tab-pane-header">
+                <p class="lead">
+                 <div class="row">
+                    <div class="col-4 options">
+                      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active draw" id="v-pills-tuition-tab" data-toggle="pill" href="#v-pills-tab1" role="tab" aria-controls="v-pills-tab1" aria-selected="true">
+                          <p class="lead mb-0 balaceTab">Tuition Balance</p>
+                        </a>
+                        <a class="nav-link" id="v-pills-credit-tab" data-toggle="pill" href="#v-pills-tab2" role="tab" aria-controls="v-pills-tab2" aria-selected="false">
+                          <p class="lead mb-0 balaceTab">Credit Additional</p>
+                        </a>
+                        <a class="nav-link" id="v-pills-afterSchoolFee-tab" data-toggle="pill" href="#v-pills-tab3" role="tab" aria-controls="v-pills-tab3" aria-selected="false">
+                          <p class="lead mb-0 balaceTab">After School Fee Balance</p>
+                        </a>
+                        <a class="nav-link" id="v-pills-insuranceFee-tab" data-toggle="pill" href="#v-pills-tab4" role="tab" aria-controls="v-pills-tab4" aria-selected="false">
+                          <p class="lead mb-0 balaceTab">Insurance Fee Balance</p>
+                        </a>
+                        <a class="nav-link" id="v-pills-lunchFee-tab" data-toggle="pill" href="#v-pills-tab5" role="tab" aria-controls="v-pills-tab5" aria-selected="false">
+                          <p class="lead mb-0 balaceTab">Lunch Fee Balance</p>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-tab1" role="tabpanel" aria-labelledby="v-pills-tab1-tab">
+                          <table class="table">
+                          <caption>Table shows by updated day</caption>
+                          <thead>
+                            <tr>
+                              <th scope="col">Created Date</th>
+                              <th scope="col">Updated Fee</th>
+                              <th scope="col">Created By</th>
+                            </tr>
+                          </thead>
+                           <% student.updateFees.forEach(function(updateFee){ %>
+                          <tbody>
+                            <tr>
+                              <th scope="row"><%=moment(updateFee.createdAt).format("MM-DD-YYYY")%></th>
+                              <td><%=updateFee.updatedTuition%></td>
+                              <td><%=updateFee.author.firstName%></td>
+                              <td>
+                                 <% if(currentUser && updateFee.author.id.equals(currentUser._id)){ %>
+                                   <a class="btn btn-sm btn-warning" href="/home/<%=student._id%>/fee/<%=updateFee._id%>/edit">Edit</a>
+                                  <form class="delete-form" action="/home/<%=student._id%>/fee/<%=updateFee._id%>?_method=DELETE" method="POST">
+                                  <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                                </form>
+                               </div>
+                               <% }%>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <% });%>
+                        </table>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-tab2" role="tabpanel" aria-labelledby="v-pills-tab2-tab">
+                          <table class="table">
+                          <caption>Table shows by updated day</caption>
+                          <thead>
+                            <tr>
+                              <th scope="col">Created Date</th>
+                              <th scope="col">Updated Credit</th>
+                              <th scope="col">Created By</th>
+                            </tr>
+                          </thead>
+                           <% student.updateFees.forEach(function(updateFee){ %>
+                          <tbody>
+                            <tr>
+                              <th scope="row"><%=moment(updateFee.createdAt).format("MM-DD-YYYY")%></th>
+                              <td><%=updateFee.updatedCredit%></td>
+                              <td><%=updateFee.author.firstName%></td>
+                              <td>
+                                 <% if(currentUser && updateFee.author.id.equals(currentUser._id)){ %>
+                                   <a class="btn btn-sm btn-warning" href="/home/<%=student._id%>/fee/<%=updateFee._id%>/edit">Edit</a>
+                                  <form class="delete-form" action="/home/<%=student._id%>/fee/<%=updateFee._id%>?_method=DELETE" method="POST">
+                                  <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                                </form>
+                               </div>
+                               <% }%>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <% });%>
+                        </table>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-tab3" role="tabpanel" aria-labelledby="v-pills-tab3-tab">
+                          <table class="table">
+                          <caption>Table shows by updated day</caption>
+                          <thead>
+                            <tr>
+                              <th scope="col">Created Date</th>
+                              <th scope="col">Updated Fee</th>
+                              <th scope="col">Created By</th>
+                            </tr>
+                          </thead>
+                           <% student.updateFees.forEach(function(updateFee){ %>
+                          <tbody>
+                            <tr>
+                              <th scope="row"><%=moment(updateFee.createdAt).format("MM-DD-YYYY")%></th>
+                              <td><%=updateFee.updatedAfterSchoolFee%></td>
+                              <td><%=updateFee.author.firstName%></td>
+                              <td>
+                                 <% if(currentUser && updateFee.author.id.equals(currentUser._id)){ %>
+                                   <a class="btn btn-sm btn-warning" href="/home/<%=student._id%>/fee/<%=updateFee._id%>/edit">Edit</a>
+                                  <form class="delete-form" action="/home/<%=student._id%>/fee/<%=updateFee._id%>?_method=DELETE" method="POST">
+                                  <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                                </form>
+                               </div>
+                               <% }%>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <% });%>
+                        </table>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-tab4" role="tabpanel" aria-labelledby="v-pills-tab4-tab">
+                          <table class="table">
+                          <caption>Table shows by updated day</caption>
+                          <thead>
+                            <tr>
+                              <th scope="col">Created Date</th>
+                              <th scope="col">Updated Fee</th>
+                              <th scope="col">Created By</th>
+                            </tr>
+                          </thead>
+                           <% student.updateFees.forEach(function(updateFee){ %>
+                          <tbody>
+                            <tr>
+                              <th scope="row"><%=moment(updateFee.createdAt).format("MM-DD-YYYY")%></th>
+                              <td><%=updateFee.updatedInsuranceFee%></td>
+                              <td><%=updateFee.author.firstName%></td>
+                              <td>
+                                 <% if(currentUser && updateFee.author.id.equals(currentUser._id)){ %>
+                                   <a class="btn btn-sm btn-warning" href="/home/<%=student._id%>/fee/<%=updateFee._id%>/edit">Edit</a>
+                                  <form class="delete-form" action="/home/<%=student._id%>/fee/<%=updateFee._id%>?_method=DELETE" method="POST">
+                                  <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                                </form>
+                               </div>
+                               <% }%>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <% });%>
+                        </table>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-tab5" role="tabpanel" aria-labelledby="v-pills-tab5-tab">
+                          <table class="table">
+                          <caption>Table shows by updated day</caption>
+                          <thead>
+                            <tr>
+                              <th scope="col">Created Date</th>
+                              <th scope="col">Updated Fee</th>
+                              <th scope="col">Created By</th>
+                            </tr>
+                          </thead>
+                           <% student.updateFees.forEach(function(updateFee){ %>
+                          <tbody>
+                            <tr>
+                              <th scope="row"><%=moment(updateFee.createdAt).format("MMM Do YY")%></th>
+                              <td><%=updateFee.updatedLunchFee%></td>
+                              <td><%=updateFee.author.firstName%></td>
+                              <td>
+                                 <% if(currentUser && updateFee.author.id.equals(currentUser._id)){ %>
+                                   <a class="btn btn-sm btn-warning" href="/home/<%=student._id%>/fee/<%=updateFee._id%>/edit">Edit</a>
+                                  <form class="delete-form" action="/home/<%=student._id%>/fee/<%=updateFee._id%>?_method=DELETE" method="POST">
+                                  <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                                </form>
+                               </div>
+                               <% }%>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <% });%>
+                        </table>
+                        </div>
+                      </div>
+                        <a href="/home/<%=student._id%>/fee/update" class="btn btn-info btn-xs" id="addBalance">
+                       <span class="glyphicon glyphicon-print"></span> Add Balance 
+                       </a>
+                    </div>
+                  </div>
+                    </p>
+                  </div>
+                </div>
+              </div>
+         <div class="text-right">
+                    <a class="btn btn-success" href="/home/<%=student._id %>/comments/new">Add New Comment</a>
+                </div>
+         <hr>
+       <div class="card border-light col-md-12 text-left" id="commentBox">
+        <% student.comments.forEach(function(comment){ %>
+          <div class="card-header"><%=comment.author.firstName%> <%=comment.author.lastName%>
+          </div>
+          <div class="card-body">
+             <h5 class="card-title"><%=comment.title%></h5>
+             <p class="card-text"><%=comment.text%></p>
+             <p class="text-right"><%=moment(comment.createdAt).fromNow()%></p>
+             <div class="text-right">
+                <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                 <a class="btn btn-sm btn-warning" href="/home/<%=student._id%>/comments/<%=comment._id %>/edit">Edit</a>
+                <form class="delete-form" action="/home/<%=student._id%>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+              </form>
+             </div>
+             <% }%>
+          </div>
+             <% }); %>
+          </div>
+      </div> 
+    </div> 
+  </div> 
+ <% include ./partials/footer %>
