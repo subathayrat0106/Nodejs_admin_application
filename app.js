@@ -48,7 +48,11 @@ app.use(function(req, res, next){
 app.use("/",indexRoutes);
 app.use("/home",homeRoutes);
 app.use("/home/:id/comments",commentRoutes);
-//app.use("/home/:id/fee",feeRoutes);
+
+app.use(function (req, res, next) {
+  res.status(404).render("error");
+});
+
 
 app.listen(process.env.PORT,process.env.IP,function()
 {
