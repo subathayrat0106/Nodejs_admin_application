@@ -20,7 +20,7 @@ router.post("/signup",function(req, res) {
     lastName:capitalizeFirstLetter(req.body.lastName),   
     email:req.body.email
     });
-    if (req.body.adminCode == "1234"){
+    if (req.body.adminCode == process.env.ADMINCODE){
         newUser.isAdmin = true;
     }
     User.register(newUser,req.body.password,function(err,user){
