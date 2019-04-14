@@ -17,7 +17,8 @@ var  indexRoutes      = require("./routes/index"),
     
 //DB Connection
 app.locals.moment = require("moment");
-mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
+//mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/yorkland_admin", { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine","ejs");

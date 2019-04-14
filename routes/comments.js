@@ -37,7 +37,7 @@ router.post("/",middleware.isLoggedIn,function(req,res){
                   comment.save();
                   student.comments.push(comment);
                   student.save();
-                  req.flash("success","Successfully added comment");
+                  req.flash("success","Successfully Added The Comment");
                   res.redirect('/home/'+ student._id);
               }
           });
@@ -63,6 +63,7 @@ router.put("/:comment_id",middleware.isLoggedIn,function(req,res){
              req.flash('error',err.message);
             res.redirect("back");
         }else{
+            req.flash("success","Successfully Edit The Comment");
             res.redirect("/home/" + req.params.id);
         }
    }) ;
@@ -74,7 +75,7 @@ router.delete("/:comment_id",middleware.isLoggedIn,function(req,res){
          req.flash('error',err.message);
          res.redirect("back");
         }else{
-           req.flash("success","Comment deleted");
+           req.flash("success","Comment Deleted");
            res.redirect("/home/"+req.params.id);
         }
     });

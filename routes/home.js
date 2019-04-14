@@ -67,6 +67,7 @@ router.post("/",middleware.isLoggedIn,function(req,res){
            req.flash('error',err.message);
            return res.redirect('back');
        } 
+       req.flash("success", newStudent.firstName + " " + newStudent.lastName + " has been successfully added to system");
        res.redirect('/home');
     });
 });
@@ -115,7 +116,7 @@ router.put("/:id",middleware.isLoggedIn,function(req,res){
         foundStudent.finance.insuranceFee = req.body.insuranceFee;
         foundStudent.finance.lunchFee = req.body.lunchFee;
         foundStudent.save();
-        req.flash("success","Student Infomation Have Been Successfully Edit!");
+        req.flash("success", foundStudent.firstName + " " + foundStudent.lastName  + " Infomation Have Been Successfully Updated!");
         res.redirect("/home/" + foundStudent._id);
     });
 });
@@ -128,6 +129,7 @@ router.delete("/:id",middleware.isLoggedIn,function(req,res){
             res.flash("error","Unable delete the info");
             res.redirect("/home");
         }else{
+            req.flash("success","Student Has Been Successfully Deleted");
             res.redirect("/home");
         }
     });
@@ -160,7 +162,7 @@ router.post("/:id/fee",middleware.isLoggedIn,function(req,res){
                     updateFee.save();
                     student.updateFees.push(updateFee);
                     student.save();
-                    req.flash("success","Successfully updated student fee");
+                    req.flash("success","Successfully Add balance To Student");
                     res.redirect('/home');
                 }
             });
@@ -175,7 +177,6 @@ router.get("/:id/fee/:updateFee_id/edit",middleware.isLoggedIn,function(req ,res
             res.redirect("back");
         }else{
             res.render("fee/edit",{student_id: req.params.id, fee:newUpdateFee});
-            console.log(newUpdateFee);
         }
     });
 });
@@ -186,6 +187,7 @@ router.put("/:id/fee/:updateFee_id",middleware.isLoggedIn,function(req,res){
              req.flash('error',err.message);
             res.redirect("back");
         }else{
+            req.flash("success","Successfully Updated The Student Balance");
             res.redirect("/home/" + req.params.id);
         }
     });
@@ -197,7 +199,7 @@ router.delete("/:id/fee/:updateFee_id",middleware.isLoggedIn,function(req,res){
          req.flash('error',err.message);
          res.redirect("back");
         }else{
-           req.flash("success","Update Balance deleted");
+           req.flash("success","Balance deleted");
            res.redirect("/home/"+req.params.id);
         }
     });

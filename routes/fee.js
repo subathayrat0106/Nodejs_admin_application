@@ -51,7 +51,6 @@ router.put("/:id/fee",middleware.isLoggedIn,function(req,res){
             req.flash("error", err.message);
             res.redirect("back");
         } 
-        console.log(updateFee);
         updateFee.finance.updatedTuition = req.body.updatedTuition;
         updateFee.finance.updatedCredit = req.body.updatedCredit;
         updateFee.finance.updatedAfterSchoolFee = req.body.updatedAfterSchoolFee;
@@ -59,7 +58,6 @@ router.put("/:id/fee",middleware.isLoggedIn,function(req,res){
         updateFee.finance.updatedLunchFee = req.body.updatedLunchFee;
         updateFee.save();
         req.flash("success","Student Additional Fee Have Been Successfully Updated!");
-        console.log(updateFee);
         res.redirect("/home/" + updateFee.id);
     });
 });
