@@ -16,8 +16,8 @@ var  indexRoutes      = require("./routes/index"),
      //feeRoutes        = require("./routes/fee");
     
 //DB Connection
-app.locals.moment = require("moment");
-//mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
+//app.locals.moment = require("moment");
+mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
 mongoose.connect("mongodb://localhost:27017/yorkland_admin", { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true);
 app.use(bodyParser.urlencoded({ extended: true }));
